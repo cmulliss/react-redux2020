@@ -9,6 +9,10 @@ function App() {
   return (
     <div className='ui container comments'>
       <ApprovalCard>
+        Are you sure you want to do this?
+        <h4>Warning!</h4>
+      </ApprovalCard>
+      <ApprovalCard>
         <CommentDetail
           authorName='Sam'
           text='Hello there!'
