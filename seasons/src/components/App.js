@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 
+import SeasonDisplay from './SeasonDisplay'
+
 class App extends Component {
   state = {
     lat: null,
-    lon: null,
     errorMessage: ''
   }
 
@@ -24,17 +25,17 @@ class App extends Component {
     if (this.state.errorMessage && !this.state.lat) {
       return <div>Error: {this.state.errorMessage}</div>
     }
+    // taking a property from the state, on the App component, and passing it down as a prop into SeasonDisplay.
     if (!this.state.errorMessage && this.state.lat) {
-      return <div>Latitude: {this.state.lat}</div>
+      return <SeasonDisplay lat={this.state.lat} />
     }
     if (!this.state.lat && !this.state.errorMessage) {
-      return <div>Loading: {}</div>
+      return <div>Loading!</div>
     }
     return (
       <div>
         <h1>Seasons</h1>
         <div>Latitude: {this.state.lat}</div>
-        <div>Longitude: {this.state.lon}</div>
         <div>Error: {this.state.errorMessage}</div>
       </div>
     )
