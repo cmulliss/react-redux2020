@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './SeasonDisplay.css'
+
 // new configuration object with 2 key:value pairs
 const seasonConfig = {
   Summer: {
@@ -24,10 +26,10 @@ const SeasonDisplay = (props) => {
   const { text, iconName } = seasonConfig[season] // text, iconName
 
   return (
-    <div>
-      <i className={`${iconName} icon`} />
+    <div className={`season-display ${season}`}>
+      <i className={`icon-left massive ${iconName} icon`} />
       <h1>{text}</h1>
-      <i className={`${iconName} icon`} />
+      <i className={`icon-right massive ${iconName} icon`} />
     </div>
   )
 }
@@ -35,3 +37,5 @@ export default SeasonDisplay
 
 // debateable whether to put expression in jsx or take our as const
 // semantic-ui for icons.
+// 'massive' from semantic-ui icons, icon-left etc from css file.
+// Also can do a loading spinner with semantic-ui. 

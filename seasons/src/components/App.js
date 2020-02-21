@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-
+import './App.css'
 import SeasonDisplay from './SeasonDisplay'
+import Spinner from './Spinner'
 
 class App extends Component {
   state = {
@@ -21,7 +22,8 @@ class App extends Component {
       }
     )
   }
-  render() {
+
+  renderContent() {
     if (this.state.errorMessage && !this.state.lat) {
       return <div>Error: {this.state.errorMessage}</div>
     }
@@ -29,8 +31,9 @@ class App extends Component {
     if (!this.state.errorMessage && this.state.lat) {
       return <SeasonDisplay lat={this.state.lat} />
     }
+    // make use of Spinner
     if (!this.state.lat && !this.state.errorMessage) {
-      return <div>Loading!</div>
+      return <Spinner message='Please accept location request' />
     }
     return (
       <div>
@@ -40,8 +43,14 @@ class App extends Component {
       </div>
     )
   }
+
+  render() {
+    return <div className='border red'>{this.renderContent()}</div>
+  }
 }
 export default App
+
+// A lot of conditional logic inside render() method. So, going to create a helper fn to contain all the code currently inside render().
 
 // using Geolocation API
 // need to pass in 2 separate fn callbacks,
@@ -52,3 +61,4 @@ export default App
 // current position call goes outside render, to prevent location being double fetched.
 // want to update our state object AFTER we get our current location. First arg to getCurrentPosition is a callback fn, so will be called at some time in future. Use setState to update our object, latitude.
 // conditionally rendering the error message
+
