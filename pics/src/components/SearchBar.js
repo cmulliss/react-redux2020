@@ -8,8 +8,9 @@ class SearchBar extends Component {
   // need to use => syntax, or will get 'undefined'
   onFormSubmit = (event) => {
     event.preventDefault()
-
-    console.log(this.state.term)
+    // class based component using props, has 'this' keyword
+    // call it with (this.state.term)
+    this.props.onSubmit(this.state.term)
   }
 
   render() {
