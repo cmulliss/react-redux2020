@@ -5,7 +5,8 @@ import VideoList from './VideoList'
 
 class App extends Component {
   state = {
-    videos: []
+    videos: [],
+    selectedVideo: null
   }
   onTermSubmit = async (term) => {
     const response = await youtube.get('/search', {
@@ -16,13 +17,28 @@ class App extends Component {
     console.log('response', response)
     this.setState({ videos: response.data.items })
   }
-  // pass a prop videos into VideoList
+  // callback, called with some video object, fetched from API, then pass a reference to this callback down to the VideoList.
+  // onVideoSelect needs to take the video selected here, takes that video and sets it on our state, on the selectedVideo property.
+  onVideoSelect = (video) => {
+    console.log('video from the App', video)
+  }
+
+  // pass a prop 'videos' into VideoList
   render() {
     return (
       <div className='ui container'>
-        <SearchBar onFormSubmit={this.onTermSubmit} />I have{' '}
-        {this.state.videos.length} videos
-        <VideoList videos={this.state.videos} />
+        <SearchBar onFormSubmit={this.onTermSubmit} />
+        <div className='ui grid'>
+          <div className='ui row'>
+            <div className='eleven wide column'></div>
+            <div className='five wide column'>
+              <VideoList
+                onVideoSelect={this.onVideoSelect}
+                videos={this.state.videos}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
