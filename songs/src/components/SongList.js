@@ -2,13 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { selectSong } from '../actions'
 
+// any time button clicked, ie any one calls this, want to run a fn that's going to call this.props.selectSong, pass in the current song we are iterating over.
 class SongList extends Component {
   renderList = () => {
     return this.props.songs.map((song) => {
       return (
         <div className='item' key={song.title}>
           <div className='right floated content'>
-            <button className='ui button primary'>Select</button>
+            <button
+              className='ui button primary'
+              onClick={() => this.props.selectSong(song)}
+            >
+              Select
+            </button>
           </div>
           <div className='content'>{song.title}</div>
         </div>
@@ -18,12 +24,12 @@ class SongList extends Component {
 
   render() {
     // this.props === {songs: state.songs}
-    console.log('this.props', this.props)
+    console.log('this.props from SongLst', this.props)
     return <div className='ui divided list'>{this.renderList()}</div>
   }
 }
 
-// state: all the data from our redux store
+// state: all the data from our redux store, any time we change our redux state, or rerun our reducers and produce a new state object, mapStateToProps fn will rerun with the newly created state. (ie, when we click the button)
 const mapStateToProps = (state) => {
   console.log('state:', state)
 
@@ -51,3 +57,5 @@ export default connect(mapStateToProps, {
 // always going to return an object which is going to show up as props inside the component
 
 // In the console, can see the action creator, selectSong as well as an array of songs. If we call it, it's going to automatically take the action that gets returned and send it in to redux's dispatch fn.
+
+// We are passing the action object to the mapDispatchToProps argument of the connect function. When we do this, Redux provides the connected component with the action creator as props, so that we can call it to dispatch the action: this.props.selectSong(song).
