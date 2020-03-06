@@ -1,12 +1,10 @@
 import jsonPlaceholder from '../apis/jsonPlaceholder.'
 
-export const fetchPosts = async () => {
+// defining a fn that is going to return a fn
+export const fetchPosts = () => async (dispatch) => {
   const response = await jsonPlaceholder.get('/posts')
 
-  return {
-    type: 'FETCH_POSTS',
-    payload: response
-  }
+  dispatch({ type: 'FETCH_POSTS', payload: response })
 }
 
 // using preconfigured axios instance to make a request inside our action creator. Using async, await then list out actual request. Then assign result to response. Finally, take response object and assign it to the payload property.
@@ -19,3 +17,8 @@ export const fetchPosts = async () => {
 
 // problem 2
 // By the time our action gets to a reducer, we wont have fetched our data.
+
+// returning an object as action, when making use of redux-thunk, not going to return any actions from the inner fn any more.
+
+// The entire problem with async await is that with a synchronous action creator it causes us to return a request object, instead of an action. Once we have redux thunk, the async await syntax is only going to modify the return values of the inner fn.
+// It is only what we return from the outer fn, the action creator itsef, that we care about.
