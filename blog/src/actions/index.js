@@ -1,10 +1,16 @@
+import _ from 'lodash'
 import jsonPlaceholder from '../apis/jsonPlaceholder.'
 
-// defining a fn that is going to return a fn
+// defining a fn that is going to return a fn, fetches []
 export const fetchPosts = () => async (dispatch) => {
   const response = await jsonPlaceholder.get('/posts')
-
-  dispatch({ type: 'FETCH_POSTS', payload: response })
+  // on payload property, have entire response, but only want the data
+  dispatch({ type: 'FETCH_POSTS', payload: response.data })
+}
+// second action creator, dispatch action, fetches object
+export const fetchUser = (id) => async (dispatch) => {
+  const response = await jsonPlaceholder.get(`/users/${id}`)
+  dispatch({ type: 'FETCH_USER', payload: response.data })
 }
 
 // using preconfigured axios instance to make a request inside our action creator. Using async, await then list out actual request. Then assign result to response. Finally, take response object and assign it to the payload property.

@@ -2,19 +2,44 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { fetchPosts } from '../actions'
+import UserHeader from './UserHeader'
 
 class PostList extends Component {
-  componentDidMount() {
-    console.log('this.props', this.props)
+  componentDidMount () {
     this.props.fetchPosts()
   }
 
-  render() {
-    return <div>PostList</div>
+  // logic to render posts out as list, to keep render method uncluttered. UserHeader needs to show user, so need to pass down as prop.
+  renderList () {
+    return this.props.posts.map((post) => {
+      return (
+        <div className='item' key={post.id}>
+          <i className='large middle aligned icon user' />
+          <div className='content'>
+            <div className='description'>
+              <h2>{post.title}</h2>
+              <p>{post.body}</p>
+            </div>
+            <UserHeader userId={post.userId} />
+          </div>
+        </div>
+      )
+    })
+  }
+
+  render () {
+    console.log('this.props.posts', this.props.posts)
+    return <div className='ui relaxed divided list'>{this.renderList()}</div>
+  }
+}
+// our state object here is going have a property, posts and hold all the data the reducer has returned. Every time our reducers run mapStateToProps is going to be called again. Going to return a new object with property posts which is going to show up as the props object inside our component.
+const mapStateToProps = (state) => {
+  return {
+    posts: state.posts
   }
 }
 
-export default connect(null, { fetchPosts: fetchPosts })(PostList)
+export default connect(mapStateToProps, { fetchPosts: fetchPosts })(PostList)
 // needs to get a list of posts from the Json api
 // so going to define a componentDidMount lifecycle method on the class, going to place an action creator inside.
 // so any time our PostList component shows on screen our action creator is going to be automatically called.
