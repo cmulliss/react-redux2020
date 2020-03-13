@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { fetchPosts } from '../actions'
+import { fetchPostsAndUsers } from '../actions'
 import UserHeader from './UserHeader'
 
 class PostList extends Component {
-  componentDidMount () {
-    this.props.fetchPosts()
+  componentDidMount() {
+    this.props.fetchPostsAndUsers()
   }
 
   // logic to render posts out as list, to keep render method uncluttered. UserHeader needs to show user, so need to pass down as prop.
-  renderList () {
+  renderList() {
     return this.props.posts.map((post) => {
       return (
         <div className='item' key={post.id}>
@@ -27,7 +27,7 @@ class PostList extends Component {
     })
   }
 
-  render () {
+  render() {
     console.log('this.props.posts', this.props.posts)
     return <div className='ui relaxed divided list'>{this.renderList()}</div>
   }
@@ -39,7 +39,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchPosts: fetchPosts })(PostList)
+export default connect(mapStateToProps, { fetchPostsAndUsers })(PostList)
 // needs to get a list of posts from the Json api
 // so going to define a componentDidMount lifecycle method on the class, going to place an action creator inside.
 // so any time our PostList component shows on screen our action creator is going to be automatically called.
