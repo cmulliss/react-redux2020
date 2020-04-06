@@ -5,7 +5,8 @@ import './App.css'
 import CommentDetail from './CommentDetail'
 import ApprovalCard from './ApprovalCard'
 
-function App() {
+// if we want to do this wrapping, we need to go into the target component, ApprovalCard, and somewhere reference props.children.
+function App () {
   return (
     <div className='ui container comments'>
       <ApprovalCard>
