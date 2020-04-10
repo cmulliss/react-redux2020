@@ -18,4 +18,17 @@
 
 - do your data loading inside componentDidMount()
 
--
+- semanitc-ui.com
+
+- elements, icons and loader, using text loader
+
+```html
+<div className="ui segment">
+  <div className="ui active dimmer">
+    <div className="ui text loader">Loading ...</div>
+  </div>
+  <p></p>
+</div>
+```
+
+- can set defaultProps on Spinner, is an object

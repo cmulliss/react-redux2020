@@ -1,29 +1,41 @@
 import React, { Component } from 'react'
 
 import SeasonDisplay from './SeasonDisplay'
+import SpinnerLoader from './SpinnerLoader'
 
 // wont be instant, so need to pass in 2 fn callbacks
 class App extends Component {
   state = {
     lat: null,
+    lon: null,
     errorMessage: '',
   }
   componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(
-      (position) => this.setState({ lat: position.coords.latitude }),
+      (position) =>
+        this.setState({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        }),
       // failure callback
       (err) => this.setState({ errorMessage: err.message })
     )
   }
-
-  render() {
+  // helper fn, to take conditional out of render, so can do something to content, like red border.
+  renderContent() {
     if (this.state.errorMessage && !this.state.lat) {
       return <div>Error: {this.state.errorMessage}</div>
     }
+
     if (!this.state.errorMessage && this.state.lat) {
-      return <SeasonDisplay />
+      return <SeasonDisplay lat={this.state.lat} />
     }
-    return <div>Loading ...</div>
+
+    return <SpinnerLoader message='Please accept location request' />
+  }
+
+  render() {
+    return <div className='border red'>{this.renderContent()}</div>
   }
 }
 
@@ -42,3 +54,4 @@ export default App
     (err) => console.log(err)
   )
 */
+// adding prop to SeasonDisplay, taking prop from state and passing it as a prop down into SeasonDisplay. When we call setState causes SeasonDisplay to be updated.
