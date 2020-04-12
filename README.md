@@ -32,3 +32,13 @@
 ```
 
 - can set defaultProps on Spinner, is an object
+
+## Event handlers
+
+- naming conventiong, eg, onInputChange
+
+1. on
+2. name of element to which we are assigning the callback
+3. the event for which we are watching
+
+- may use 'handle', but less popular than 'on'
