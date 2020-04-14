@@ -42,3 +42,18 @@
 3. the event for which we are watching
 
 - may use 'handle', but less popular than 'on'
+
+- access key: 28g3lj1uoXSXbedMwx1n6SNAcS57hShHV4xaEk9cX20
+
+## axios vs fetch
+
+- npm i --save axios
+
+- in console, open network tab, clear the request log, and then enter search term of 'cars' say. Can see GET request results
+
+- when we make a request with axios, it returns an object called a PROMISE. a promise is an object that gives us a little notification when some amount of or work, like a network request, is completed.
+
+### async / await usage
+
+- put **async** keyword in front of the method name
+- you then find whatever is returning, or taking some time to resolve (eg network request with axios.get) and pu the **await** keyword in front of that, then whatever gets returned from this entire statement, we will assign to some variable, we can then work freely with that varible.
