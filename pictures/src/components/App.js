@@ -34,7 +34,6 @@ class App extends Component {
     )
   }
 }
-
 export default App
 
 // want to pass search up from SearchBar
@@ -48,4 +47,4 @@ export default App
 
 // error message: setState is not a fn. Console logging 'this' shows value is onSubmit. We have a callback fn, onSearchSubmit that we pass down to some child component. That search bar is then going to call that fn at some point in time, in the future. Looking to left, value of this is going to be props. So, this.props, or the props object that was passed to the search bar, is going to be the value of 'this' inside 'onSubmit'.
 // replace import of axios with unsplash config file
-// props tp communicate list of images down to ImageList
+// props to communicate list of images down to ImageList
