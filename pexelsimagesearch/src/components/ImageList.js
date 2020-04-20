@@ -1,8 +1,10 @@
 import React from 'react'
 
 const ImageList = (props) => {
-  const images = props.images.map((image) => {
-    return <img src={image.src.small} key={image.id} alt={image.photographer} />
+  // sestructuring off (image)
+  // from const images = props.images.map((image)
+  const images = props.images.map(({ src, id, photographer }) => {
+    return <img src={src.medium} key={id} alt={photographer} />
   })
 
   console.log('props.images', props.images)

@@ -19,6 +19,8 @@ class App extends Component {
       params: { query: term, per_page: 10 },
     })
     // once we get this response, we set it on our component state, which will cause our componen/videos/searcht to rerender and then we can print out the number of images fetched.
+    // 'this' is equal to the instance of the App class
+    console.log('this', this)
     console.log('response.data.photos', response.data.photos)
     // update my state
     this.setState({ images: response.data.photos })
@@ -29,6 +31,10 @@ class App extends Component {
       <div className='container' style={{ marginTop: '10px' }}>
         <SearchBar onSubmit={this.onSearchSubmit} />
         <ImageList images={this.state.images} />
+        Found: {this.state.images.length} Images
+        <p>
+          Photos provided by <a href='https://pexels.com'>Pexels</a>
+        </p>
       </div>
     )
   }
