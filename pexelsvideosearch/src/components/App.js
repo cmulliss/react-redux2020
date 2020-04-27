@@ -7,6 +7,7 @@ import VideoList from './VideoList'
 class App extends Component {
   state = {
     videos: [],
+    selectedVideo: null,
   }
   // callback method to be called any time someone submits the form, onTermSubmit as state inside SearchBar is term.
   // add this callback as a prop to SearchBar.
@@ -14,7 +15,7 @@ class App extends Component {
     const response = await pexelsvideo.get('/search', {
       params: {
         query: term,
-        per_page: 5,
+        per_page: 8,
       },
     })
     // want to render a list of the newly fetched videos to our screen.  Need to get a reference to the list of videos, our list of videos is contained within response.data.videos
@@ -23,13 +24,22 @@ class App extends Component {
     console.log('response', response)
     console.log('response.data.videos', response.data.videos)
   }
+
+  //callback, down to VideoList, then down to VideoItem. The video object we select here is the object we fetch from the API. Then pass a reference to this callback down to VideoList as prop, then go to VideoList and ref the props object
+  onVideoSelect = (video) => {
+    console.log('video, from the App', video)
+  }
+
   render() {
     return (
       <div className='ui container'>
         <div>video search app</div>
         <SearchBar onFormSubmit={this.onTermSubmit} />I have{' '}
         {this.state.videos.length} videos
-        <VideoList videos={this.state.videos} />
+        <VideoList
+          videos={this.state.videos}
+          onVideoSelect={this.onVideoSelect}
+        />
       </div>
     )
   }
@@ -47,4 +57,4 @@ export default App
 
 // pass in prop, videos, to VideoList
 
-// const KEY = 'AIzaSyBd1qKoUr70RMTUl17nPCBkILyfFop2kNI'
+// we want to get a click event on our VideoItem, to make a change on the app state.
