@@ -3,7 +3,7 @@ import React from 'react'
 import VideoItem from './VideoItem'
 
 // destructuring props.videos
-// ref the props object from the App, the callback we just passed down from the App. Pass it down in turn into the VideoItem
+// ref the props object from the App, the callback we just passed down from the App. Pass it down in turn into the VideoItem. Destructure out videos ands onVideoSelect.
 const VideoList = ({ videos, onVideoSelect }) => {
   // inner fn will be called one time for every object inside the videos array. Take videos []  and map over it, for every video we will render one VideoItem.
   // add video prop

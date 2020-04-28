@@ -2,9 +2,10 @@ import React from 'react'
 
 import './VideoItem.css'
 
-// this props object is going to contain a video property which contains all the info about this particular video that we want to show as a list.
+// this props object is going to contain a video property which contains all the info about this particular video that we want to show as a list. Again destrucure out props video and onVideoSelect.
 const VideoItem = ({ video, onVideoSelect }) => {
-  // add event handler to div, want to call onVideoSelect with the particular video that was passed to this component.
+  // add event handler to div, We don't want to just invoke onVideoSelect, we want to call onVideoSelect with this very particular video item component. Whenever someone clicks on this, I want to call onVideoSelect with this particular video: const VideoItem = ({ video
+  // => fn so can call with the video.
   return (
     <div onClick={() => onVideoSelect(video)} className='video-item item'>
       <img className='ui image' src={video.image} alt={video.user.name} />

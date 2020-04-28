@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import SearchBar from './SearchBar'
 import pexelsvideo from '../apis/pexelsvideo'
 import VideoList from './VideoList'
+import VideoDetail from './VideoDetail'
 
 class App extends Component {
   state = {
@@ -25,8 +26,10 @@ class App extends Component {
     console.log('response.data.videos', response.data.videos)
   }
 
-  //callback, down to VideoList, then down to VideoItem. The video object we select here is the object we fetch from the API. Then pass a reference to this callback down to VideoList as prop, then go to VideoList and ref the props object
+  //callback, down to VideoList, then down to VideoItem. The video object we select here is the object we fetch from the API. Then pass a reference to this callback down to VideoList as prop, then go to VideoList and ref the props object.
+  // Need to make sure onVideoSelect takes the video and sets it on state.
   onVideoSelect = (video) => {
+    this.setState({ selectedVideo: video })
     console.log('video, from the App', video)
   }
 
@@ -36,6 +39,7 @@ class App extends Component {
         <div>video search app</div>
         <SearchBar onFormSubmit={this.onTermSubmit} />I have{' '}
         {this.state.videos.length} videos
+        <VideoDetail video={this.state.selectedVideo} />
         <VideoList
           videos={this.state.videos}
           onVideoSelect={this.onVideoSelect}
@@ -46,6 +50,8 @@ class App extends Component {
 }
 
 export default App
+
+// on VideoDetail, video as only one, get errror cannot read property 'user' of null, as have selectedVideo: null, in the state. Add a simple check inside VideoDetail.
 
 // <VideoList videos={this.state.videos} />
 // I have{' '}
