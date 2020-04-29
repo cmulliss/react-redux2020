@@ -9,21 +9,21 @@ const VideoDetail = ({ video }) => {
   // iframe, semantic-ui's ui embed used too.
   const videoSrc = `https://player.vimeo.com/video/${video.id}`
 
-  const reformatUrl = video.url
-    .replace(/-/g, ' ')
-    .replace(/^(?:https?:\/\/)?(?:www\.pexels.com\/video\/)?/i, '')
-    .replace(/[0-9]/g, '')
-    .replace(/^\w/, (c) => c.toUpperCase())
-    .slice(0, -1)
-
   return (
     <div>
       <div className='ui embed'>
-        <iframe title='video player' src={videoSrc} />
+        <iframe title='video' src={videoSrc} />
       </div>
       <div className='ui segment'>
         <h4 className='ui header'>{video.user.name}</h4>
-        <p>{reformatUrl}</p>
+        <p>
+          {video.url
+            .replace(/-/g, ' ')
+            .replace(/^(?:https?:\/\/)?(?:www\.pexels.com\/video\/)?/i, '')
+            .replace(/[0-9]/g, '')
+            .replace(/^\w/, (c) => c.toUpperCase())
+            .slice(0, -1)}
+        </p>
       </div>
     </div>
   )
@@ -49,7 +49,6 @@ export default VideoDetail
 
             src='https://player.vimeo.com/video/352010672?title=0&amp;portrait=0&amp;byline=0&amp;autoplay=1
 
-            this shows a video
-            https://www.pexels.com/video/2035391
+            https://www.pexels.com/video/
 
 */

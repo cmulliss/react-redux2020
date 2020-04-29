@@ -10,10 +10,6 @@ class App extends Component {
     videos: [],
     selectedVideo: null,
   }
-  // default search term when app loads
-  componentDidMount() {
-    this.onTermSubmit('games')
-  }
   // callback method to be called any time someone submits the form, onTermSubmit as state inside SearchBar is term.
   // add this callback as a prop to SearchBar.
   onTermSubmit = async (term) => {
@@ -24,13 +20,11 @@ class App extends Component {
       },
     })
     // want to render a list of the newly fetched videos to our screen.  Need to get a reference to the list of videos, our list of videos is contained within response.data.videos
-    this.setState({
-      videos: response.data.videos,
-      selectedVideo: response.data.videos[0],
-    })
+    this.setState({ videos: response.data.videos })
+
+    console.log('response', response)
+    console.log('response.data.videos', response.data.videos)
   }
-  //   console.log('response', response)
-  // console.log('response.data.videos', response.data.videos)
 
   //callback, down to VideoList, then down to VideoItem. The video object we select here is the object we fetch from the API. Then pass a reference to this callback down to VideoList as prop, then go to VideoList and ref the props object.
   // Need to make sure onVideoSelect takes the video and sets it on state.
@@ -43,20 +37,13 @@ class App extends Component {
     return (
       <div className='ui container'>
         <div>video search app</div>
-        <SearchBar onFormSubmit={this.onTermSubmit} />
-        <div className='ui grid'>
-          <div className='ui row'>
-            <div className='eleven wide column'>
-              <VideoDetail video={this.state.selectedVideo} />
-            </div>
-            <div className='five wide column'>
-              <VideoList
-                videos={this.state.videos}
-                onVideoSelect={this.onVideoSelect}
-              />
-            </div>
-          </div>
-        </div>
+        <SearchBar onFormSubmit={this.onTermSubmit} />I have{' '}
+        {this.state.videos.length} videos
+        <VideoDetail video={this.state.selectedVideo} />
+        <VideoList
+          videos={this.state.videos}
+          onVideoSelect={this.onVideoSelect}
+        />
       </div>
     )
   }
