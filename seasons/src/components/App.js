@@ -4,50 +4,22 @@ import SeasonDisplay from './SeasonDisplay'
 import Spinner from './Spinner'
 
 class App extends Component {
-  state = {
-    lat: null,
-    errorMessage: ''
-  }
-
-  componentDidMount() {
-    window.navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.setState({
-          lat: position.coords.latitude,
-          lon: position.coords.longitude
-        })
-      },
-      (err) => {
-        this.setState({ errorMessage: err.message })
-      }
-    )
-  }
-
-  renderContent() {
-    if (this.state.errorMessage && !this.state.lat) {
-      return <div>Error: {this.state.errorMessage}</div>
-    }
+ 
     // taking a property from the state, on the App component, and passing it down as a prop into SeasonDisplay.
-    if (!this.state.errorMessage && this.state.lat) {
-      return <SeasonDisplay lat={this.state.lat} />
-    }
+    
     // make use of Spinner
-    if (!this.state.lat && !this.state.errorMessage) {
-      return <Spinner message='Please accept location request' />
-    }
+   
     return (
       <div>
         <h1>Seasons</h1>
-        <div>Latitude: {this.state.lat}</div>
-        <div>Error: {this.state.errorMessage}</div>
       </div>
     )
   }
 
   render() {
-    return <div className='border red'>{this.renderContent()}</div>
+    return <div><div>text</div></div>
   }
-}
+
 export default App
 
 // A lot of conditional logic inside render() method. So, going to create a helper fn to contain all the code currently inside render().

@@ -11,7 +11,7 @@ const Spinner = (props) => {
 }
 
 Spinner.defaultProps = {
-  message: 'Loading...'
+  message: 'Loading...',
 }
 
 export default Spinner
