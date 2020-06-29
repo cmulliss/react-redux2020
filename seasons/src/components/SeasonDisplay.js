@@ -7,6 +7,7 @@ import './SeasonDisplay.css'
 // fn to determine season, outside component
 
 const SeasonDisplay = () => {
+  
   return (
     <div>
       <h1>SeasonDisplay</h1>
