@@ -10,6 +10,8 @@ class App extends Component {
     errorMessage: '',
   }
   //
+
+  //
   componentDidMount() {
     // callback, don't want this in render method
     window.navigator.geolocation.getCurrentPosition(
@@ -22,16 +24,20 @@ class App extends Component {
       }
     )
   }
+
   // make use of Spinner
 
+  // passing state (lat) as a props down into SeasonDisplay
   render() {
-    return (
-      <div>
-        <h1>Latitude: {this.state.lat}</h1>
-        <p>Error: {this.state.errorMessage}</p>
-        <SeasonDisplay />
-      </div>
-    )
+    if (this.state.errorMessage && !this.state.lat) {
+      return <div>Error: {this.state.errorMessage}</div>
+    }
+    if (!this.state.errorMessage && this.state.lat) {
+      return <SeasonDisplay lat={this.state.lat} />
+    }
+    if (!this.state.lat && !this.state.errorMessage) {
+      return <div>Loading ...</div>
+    }
   }
 }
 export default App
@@ -55,5 +61,20 @@ conditionally rendering the error message
       // second callback
       (err) => console.log('err', err)
     )
+
+
+    In the questions, need to check it works
+    render() {
+    return (
+      <div>
+        {this.state.lat
+          ? this.state.lat
+          : this.state.error
+          ? this.state.error
+          : 'Loading'}
+      </div>
+    );
+  }
+It's especially convenient when you have 2 possible states (for example state.item: 'item' and state.item: null).
 
 */
