@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import SeasonDisplay from './SeasonDisplay'
-// import Spinner from './Spinner'
+import Spinner from './Spinner'
 
 class App extends Component {
   // initially 'null' as don't yet know the number, then taking a property from the state, on the App component, and passing it down as a prop into SeasonDisplay.
@@ -25,9 +25,11 @@ class App extends Component {
     )
   }
 
+  //   A lot of conditional logic inside render() method. So, going to create a helper fn to contain all the code currently inside render().
+
   // make use of Spinner
 
-  // passing state (lat) as a props down into SeasonDisplay
+  // remove conditionals from render method
   render() {
     if (this.state.errorMessage && !this.state.lat) {
       return <div>Error: {this.state.errorMessage}</div>
@@ -36,14 +38,13 @@ class App extends Component {
       return <SeasonDisplay lat={this.state.lat} />
     }
     if (!this.state.lat && !this.state.errorMessage) {
-      return <div>Loading ...</div>
+      return <Spinner message='Please allow us to read your location' />
     }
   }
 }
 export default App
 /*
-
-A lot of conditional logic inside render() method. So, going to create a helper fn to contain all the code currently inside render().
+ passing state (lat) as a props down into SeasonDisplay, so very closely linked with the App. Every time we call setState, App component updates itself, then causing SeasonDisplay to update too, ie, will rerender any children.
 
 using Geolocation API
 need to pass in 2 separate fn callbacks,

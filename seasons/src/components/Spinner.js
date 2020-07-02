@@ -11,9 +11,9 @@ const Spinner = (props) => {
 }
 
 Spinner.defaultProps = {
-  message: 'Loading...',
+  message: 'Loading...'
 }
 
 export default Spinner
 
-// default props if no message prop passed in, is more elegant
+// default props if no message prop passed in, is more elegant than just missing text.
