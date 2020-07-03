@@ -6,30 +6,20 @@ class SearchBar extends Component {
   }
   // dont want form to automatically submit itself
   // need to use => syntax, or will get 'undefined'
-  onFormSubmit = (event) => {
-    event.preventDefault()
+  
     // class based component using props, has 'this' keyword
     // call it with (this.state.term)
-    this.props.onSubmit(this.state.term)
+    
   }
 
   render() {
     return (
-      <div className='ui segment'>
-        <form onSubmit={this.onFormSubmit} className='ui form'>
-          <div className='field'>
-            <label>Image Search</label>
-            <input
-              type='text'
-              value={this.state.term}
-              onChange={(e) => this.setState({ term: e.target.value })}
-            />
-          </div>
-        </form>
+      <div>
+        <div>form</div>
       </div>
     )
   }
-}
+
 
 export default SearchBar
 

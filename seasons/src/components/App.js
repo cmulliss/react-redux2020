@@ -9,9 +9,7 @@ class App extends Component {
     lat: null,
     errorMessage: '',
   }
-  //
 
-  //
   componentDidMount() {
     // callback, don't want this in render method
     window.navigator.geolocation.getCurrentPosition(
@@ -26,11 +24,8 @@ class App extends Component {
   }
 
   //   A lot of conditional logic inside render() method. So, going to create a helper fn to contain all the code currently inside render().
-
   // make use of Spinner
-
-  // remove conditionals from render method
-  render() {
+  renderContent = () => {
     if (this.state.errorMessage && !this.state.lat) {
       return <div>Error: {this.state.errorMessage}</div>
     }
@@ -40,6 +35,11 @@ class App extends Component {
     if (!this.state.lat && !this.state.errorMessage) {
       return <Spinner message='Please allow us to read your location' />
     }
+  }
+
+  // remove conditionals from render method to new helper.
+  render() {
+    return <div className='border-red'>{this.renderContent()}</div>
   }
 }
 export default App

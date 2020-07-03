@@ -1,41 +1,24 @@
 import React, { Component } from 'react'
 
 class ImageCard extends Component {
-  constructor(props) {
-    super(props)
+  
     // until loads image only requires 0 space
-    this.state = { spans: 0 }
+    
 
-    this.imageRef = React.createRef()
+    
   }
   // passing a callback to an event listener
-  componentDidMount() {
-    const height = this.imageRef.current.clientHeight
-
-    const spans = Math.ceil(height / 10)
-
-    this.imageRef.current.addEventListener('load', this.setSpans)
-
-    this.setState({ spans: spans })
-  }
-
-  setSpans = () => {
-    console.log(
-      'this.imageRef.current.clientHeight',
-      this.imageRef.current.clientHeight
-    )
-  }
+  
 
   render() {
-    console.log('this.props', this.props)
-    const { description, urls } = this.props.image
+    
     return (
-      <div style={{ gridRowEnd: `span ${this.state.spans}` }}>
-        <img ref={this.imageRef} alt={description} src={urls.regular} />
+      <div>
+       <h1>card</h1>
       </div>
     )
   }
-}
+
 
 export default ImageCard
 // ImageCard getting its props from ImageList

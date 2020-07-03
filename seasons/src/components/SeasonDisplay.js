@@ -1,20 +1,18 @@
 import './SeasonDisplay.css'
 import React from 'react'
 
-
-
 // new configuration object with 2 key:value pairs, easy to update.
 const seasonConfig = {
   Summer: {
     text: 'Lets hit the beach',
-    iconName: 'sun'
+    iconName: 'sun',
   },
   Winter: {
     text: 'Brr, it is chilly!',
-    iconName: 'snowflake'
-  }
+    iconName: 'snowflake',
+  },
 }
-
+// helper fn
 const getSeason = (lat, month) => {
   if (month > 2 && month < 9) {
     return lat > 0 ? 'Summer' : 'Winter'
