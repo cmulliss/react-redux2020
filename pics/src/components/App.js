@@ -1,17 +1,21 @@
 import React, { Component } from 'react'
 // import unsplash from '../api/unsplash'
 
-// import SearchBar from './SearchBar'
+import SearchBar from './SearchBar'
 // import ImageList from './ImageList'
 
 class App extends Component {
+  onSearchSubmit = (term) => {
+    console.log('term', term)
+  }
   // console.log('response.data.results;', response.data.results)
 
   // define a new prop on the ImageList, called images, and pass all the images we have inside our state object.
-  render () {
+  // define prop on SearchBar, is our callback being passed down as prop, onSearchSubmit
+  render() {
     return (
-      <div>
-        <h1>Pics</h1>
+      <div className='ui container' style={{ marginTop: 10 }}>
+        <SearchBar onSubmit={this.onSearchSubmit} />
       </div>
     )
   }
