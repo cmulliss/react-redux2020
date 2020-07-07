@@ -1,17 +1,21 @@
 import React from 'react'
 
 import './ImageList.css'
-import ImageCard from './ImageCard'
+import ListItem from './ListItem'
+import { Grid } from 'semantic-ui-react'
 
-// props from App, of images.
-// the inner => fn is going to be called with each image from our list of images.
 const ImageList = (props) => {
-  // passing the [] that gets created to images
-  const images = props.images.map((image) => {
-    return <ImageCard key={image.id} image={image} />
+  const listItems = props.images.map(({ id, urls, description }) => {
+    return <ListItem key={id} value={urls.regular} description={description} />
   })
-  // console.log('props.images', props.images)
-  return <div className='image-list'>{images}</div>
+
+  return (
+    <div>
+      <Grid stackable>
+        <Grid.Row columns={3}>{listItems}</Grid.Row>
+      </Grid>
+    </div>
+  )
 }
 
 export default ImageList

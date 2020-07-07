@@ -1,21 +1,18 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { Grid, Image } from 'semantic-ui-react'
 
-class ImageCard extends Component {
-  // until loads image only requires 0 space
-
-  // passing a callback to an event listener
-
-  render() {
-    const { description, urls } = this.props.image
-    return (
-      <div>
-        <img alt={description} src={urls.regular} />
-      </div>
-    )
-  }
+const ListItem = (props) => {
+  return (
+    <div>
+      <Grid.Column style={{ marginTop: 20 }}>
+        <Image src={props.value} alt={props.description} />
+      </Grid.Column>
+    </div>
+  )
 }
 
-export default ImageCard
+export default ListItem
+
 // ImageCard getting its props from ImageList
 // this should render an image
 // ref and imageRef as prop
