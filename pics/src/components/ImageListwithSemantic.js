@@ -5,16 +5,17 @@ import ListItem from './ListItem'
 import { Grid } from 'semantic-ui-react'
 
 const ImageList = (props) => {
-  const listItems = props.images.map(({ id, urls, description }) => {
-    return <ListItem key={id} value={urls.regular} description={description} />
+  const images = props.images
+  const listItems = images.map(({ id, urls, alt_description }) => {
+    return (
+      <ListItem key={id} value={urls.regular} description={alt_description} />
+    )
   })
 
   return (
-    <div>
-      <Grid stackable>
-        <Grid.Row columns={3}>{listItems}</Grid.Row>
-      </Grid>
-    </div>
+    <Grid stackable>
+      <Grid.Row columns={3}>{listItems}</Grid.Row>
+    </Grid>
   )
 }
 

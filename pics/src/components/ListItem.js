@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Grid, Image } from 'semantic-ui-react'
 
-const ListItem = (props) => {
-  return (
-    <div>
+class ListItem extends Component {
+  render() {
+    return (
       <Grid.Column style={{ marginTop: 20 }}>
-        <Image src={props.value} alt={props.description} />
+        <Image src={this.props.value} alt={this.props.description} />
       </Grid.Column>
-    </div>
-  )
+    )
+  }
 }
 
 export default ListItem

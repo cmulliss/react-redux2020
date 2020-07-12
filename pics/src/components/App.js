@@ -3,7 +3,7 @@ import unsplash from '../api/unsplash'
 
 import SearchBar from './SearchBar'
 import ImageList from './ImageList'
-//  simport ImageList from './ImageListwithSemantic'
+//import ImageList from './ImageListwithSemantic'
 
 class App extends Component {
   state = {

@@ -1,15 +1,30 @@
 import React, { Component } from 'react'
 
 class ImageCard extends Component {
-  // until loads image only requires 0 space
+  // creat a ref and assign it to some instance variables that we can refer back to it later on inside class.
+  state = { spans: 0 }
 
+  imageRef = React.createRef()
+
+  // to early to get the height, as we don't yet have the image loaded up, add plain vanilla event handler, once it emits this 'load' it means we have successfully downloaded the image
+  componentDidMount() {
+    this.imageRef.current.addEventListener('load', this.setSpans)
+  }
   // passing a callback to an event listener
+  setSpans = () => {
+    const height = this.imageRef.current.clientHeight
+    // row height 150px, add one to round up to next row, then set on state
+    const spans = Math.ceil(height / 10)
 
+    this.setState({ spans: spans })
+  }
+
+  // new prop on img, imageRef
   render() {
     const { description, urls } = this.props.image
     return (
-      <div>
-        <img alt={description} src={urls.regular} />
+      <div style={{ gridRowEnd: `span ${this.state.spans}` }}>
+        <img ref={this.imageRef} alt={description} src={urls.regular} />
       </div>
     )
   }
