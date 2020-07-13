@@ -1,0 +1,17 @@
+import React, { Component } from 'react'
+
+import SearchBar from './SearchBar'
+
+class App extends Component {
+  render() {
+    return (
+      <div className='ui container'>
+        <SearchBar />
+      </div>
+    )
+  }
+}
+
+export default App
+
+// AIzaSyCuQi9RmHLL97Hkbrp5-uzGBueZDP5fM7k

@@ -8,8 +8,8 @@ export default axios.create({
     part: 'snippet',
     type: 'video',
     maxResults: 5,
-    key: KEY
-  }
+    key: KEY,
+  },
 })
 
 // pre configured instance of axios that has a base URL and some default parmeters loaded. Will be able to do something like:
