@@ -2,12 +2,15 @@ import React, { Component } from 'react'
 
 import youtube from '../apis/youtube'
 import SearchBar from './SearchBar'
+import VideoList from './VideoList'
 
 const KEY = 'AIzaSyCuQi9RmHLL97Hkbrp5-uzGBueZDP5fM7k'
 
 class App extends Component {
-  onTermSubmit = (term) => {
-    youtube.get('/search', {
+  state = { videos: [] }
+
+  onTermSubmit = async (term) => {
+    const response = await youtube.get('/search', {
       params: {
         q: term,
         part: 'snippet',
@@ -16,12 +19,14 @@ class App extends Component {
         key: KEY,
       },
     })
-    console.log('term', term)
+    this.setState({ videos: response.data.items })
   }
   render() {
     return (
       <div className='ui container'>
-        <SearchBar onFormSubmit={this.onTermSubmit} />
+        <SearchBar onFormSubmit={this.onTermSubmit} />I have{' '}
+        {this.state.videos.length} videos.
+        <VideoList videos={this.state.videos} />
       </div>
     )
   }
@@ -30,7 +35,11 @@ class App extends Component {
 export default App
 
 /*
+the list of videos in contained in response.data.items,
+
 We want to take the list of videos received and set them as state on our App component. That's going to allow App to update itself, or render itself, which is then going to allow us to render the newly fetched videos as a list to the screen.
+
+passing a prop down into VideoList, called videos, which is going to be a ref to the [] of videos we call anytime we call onTermSubmit. State as props.
 
 Add a callback method to our class App, that will be called anytime someone submits the SearchBar form, onTermSubmit, that will be called with some search string. Then add this as a prop to <SearchBar />. Then go to SearchBar.js.
 
