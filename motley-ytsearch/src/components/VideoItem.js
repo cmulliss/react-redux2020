@@ -1,10 +1,18 @@
 import React from 'react'
 
-const VideoItem = (props) => {
-  console.log('props', props)
+import './VideoItem.css'
+
+const VideoItem = ({ video }) => {
   return (
-    <div>
-      <div>VideoItem</div>
+    <div className='video-item item'>
+      <img
+        className='ui image'
+        src={video.snippet.thumbnails.medium.url}
+        alt={video.snippet.title}
+      />
+      <div className='content'>
+        <div className='header'>{video.snippet.title}</div>
+      </div>
     </div>
   )
 }
@@ -12,5 +20,13 @@ const VideoItem = (props) => {
 export default VideoItem
 
 /*
+From the VideoList.js, come over to the VideoItem.js, it's props object is now going to contain a video property
+
 The props object here, contains a video property
+destructure out just the video property  from props
+    const VideoItem = (props) => {
+    const VideoItem = ({ video }) => {
+
+Have the video property, inside that the snippet, then title etc
+
 */

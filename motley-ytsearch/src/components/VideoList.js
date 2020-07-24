@@ -4,13 +4,13 @@ import VideoItem from './VideoItem'
 
 const VideoList = ({ videos }) => {
   const renderedList = videos.map((video) => {
-    return <VideoItem video={video} />
+    return <VideoItem video={video} key={video.etag} />
   })
   // props.videos
   console.log('videos', videos)
   return (
     <div>
-      <div>{renderedList}</div>
+      <div className='ui relaxed divided list'>{renderedList}</div>
     </div>
   )
 }
@@ -31,4 +31,6 @@ take each of the video objects, videos.map((video), and pass them down as a prop
 
 So, now in VideoItem (above) add in a prop calles video and pass it the video that we are currently iterating over.
 return <VideoItem video={video} />
+
+Then go over to the VideoItem.js, it's props object is now going to contain a video property
 */

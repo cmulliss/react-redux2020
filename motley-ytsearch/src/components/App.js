@@ -76,5 +76,7 @@ App.js:
         key: KEY
       }
     });
+   
+    video and onVideoSelect callback both get passed down as props from App, 
 
 */
