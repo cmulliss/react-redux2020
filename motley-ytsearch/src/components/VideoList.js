@@ -2,9 +2,12 @@ import React from 'react'
 
 import VideoItem from './VideoItem'
 
-const VideoList = ({ videos }) => {
+// destructuring out videos and onVideoSelect
+const VideoList = ({ videos, onVideoSelect }) => {
   const renderedList = videos.map((video) => {
-    return <VideoItem video={video} key={video.etag} />
+    return (
+      <VideoItem onVideoSelect={onVideoSelect} video={video} key={video.etag} />
+    )
   })
   // props.videos
   console.log('videos', videos)
