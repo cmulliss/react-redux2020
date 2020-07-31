@@ -10,6 +10,11 @@ const KEY = 'AIzaSyCuQi9RmHLL97Hkbrp5-uzGBueZDP5fM7k'
 class App extends Component {
   state = { videos: [], selectedVideo: null }
 
+  // want a default search, so something showing on screen
+  componentDidMount() {
+    this.onTermSubmit('buildings')
+  }
+
   onTermSubmit = async (term) => {
     const response = await youtube.get('/search', {
       params: {
@@ -20,7 +25,11 @@ class App extends Component {
         key: KEY,
       },
     })
-    this.setState({ videos: response.data.items })
+    // want to update not only list of videos, but also selected video when user searches. By default show 1st.
+    this.setState({
+      videos: response.data.items,
+      selectedVideo: response.data.items[0],
+    })
   }
 
   onVideoSelect = (video) => {
@@ -30,11 +39,19 @@ class App extends Component {
     return (
       <div className='ui container'>
         <SearchBar onFormSubmit={this.onTermSubmit} />
-        <VideoDetail video={this.state.selectedVideo} />
-        <VideoList
-          onVideoSelect={this.onVideoSelect}
-          videos={this.state.videos}
-        />
+        <div className='ui stackable grid'>
+          <div className='ui row'>
+            <div className='eleven wide column'>
+              <VideoDetail video={this.state.selectedVideo} />
+            </div>
+            <div className='five wide column'>
+              <VideoList
+                onVideoSelect={this.onVideoSelect}
+                videos={this.state.videos}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
