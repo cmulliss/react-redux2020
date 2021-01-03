@@ -7,14 +7,17 @@ const Accordion = ({ items }) => {
   const onTitleClick = (index) => {
     setActiveIndex(index)
   }
+  // active classname decides whether item will be expanded.
   const renderedItems = items.map((item, index) => {
+    const active = index === activeIndex ? 'active' : ''
+
     return (
       <Fragment key={item.title}>
-        <div className='title active' onClick={() => onTitleClick(index)}>
+        <div className={`title ${active}`} onClick={() => onTitleClick(index)}>
           <i className='dropdown icon' />
           {item.title}
         </div>
-        <div className='content active'>
+        <div className={`content ${active}`}>
           <p>{item.content}</p>
         </div>
       </Fragment>
@@ -23,7 +26,6 @@ const Accordion = ({ items }) => {
   return (
     <div>
       <div className='ui styled accordion'>{renderedItems}</div>
-      <h1>Active Index: {activeIndex}</h1>
     </div>
   )
 }
