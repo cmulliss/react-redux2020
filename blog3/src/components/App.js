@@ -1,22 +1,12 @@
 import './App.css'
+import CommentDetail from './CommentDetail'
 
 const App = () => {
   return (
     <div className='ui container comments'>
-      <div className='comment'>
-        <a href='/' className='avatar'>
-          <img alt='avatar' />
-        </a>
-        <div className='content'>
-          <a href='/' className='author'>
-        Sam
-          </a>
-          <div className='metdata'>
-            <span className='date'>Today at 6:000PM</span>
-          </div>
-          <div className='text'>Nice Blog Post</div>
-        </div>
-      </div>
+      <CommentDetail author='Sam' />
+      <CommentDetail author='Alex' />
+      <CommentDetail author='Jane' />
     </div>
   )
 }
@@ -24,5 +14,5 @@ const App = () => {
 export default App
 
 /*
-<img alt="avatar" src={faker.image.image()} />
+Props
 */
