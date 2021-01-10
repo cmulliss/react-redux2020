@@ -5,6 +5,14 @@ import ApprovalCard from './ApprovalCard'
 const App = () => {
   return (
     <div className='ui container comments'>
+
+      <ApprovalCard>
+        <div>
+          <h4>Warning!</h4>
+        </div>
+    Are you sure?
+      </ApprovalCard>
+
       <ApprovalCard>
         <CommentDetail
           author='Sam' timeAgo='Today at 4:45PM' commentText='Nice Blog' image='https://source.unsplash.com/random'
