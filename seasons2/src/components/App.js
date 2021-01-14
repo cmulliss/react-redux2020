@@ -1,41 +1,38 @@
 import React, { Component } from 'react'
+import SeasonDisplay from './SeasonDisplay'
 import './App.css'
-export default class App extends Component {
+class App extends Component {
     state = {
         lat: null,
         lon: null,
         errorMessage: ''
     }
-
-    // error if component not mounted
+    // code error if component not mounted, also want to do this one time only. Don't do data loading in constructor, this is better, do it all inside componentDidMount.
 componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(
         // first callback
-        position => {
+        position => 
             this.setState({
                 lat:position.coords.latitude,
                 lon: position.coords.longitude
-            })
-        },
+            }),
         // 2nd callback
-        (err) => {
-            this.setState({
-                errorMessage: err.message
-            })
-        }
+        (err) => 
+            this.setState({errorMessage: err.message})
+        
       )
     }
   render () {
-    
-    return (
-      <div>
-        <p>Lattitude: {this.state.lat}</p>
-        <p>Longitude: {this.state.lon}</p>
-        <p>Error: {this.state.errorMessage}</p>
-      </div>
-    )
+    if (this.state.errorMessage && !this.state.lat) {
+            return <div>Error: {this.state.errorMessage}</div>
+        }
+     if (!this.state.errorMessage && this.state.lat) {
+         return <SeasonDisplay lat={this.state.lat}/>
+     }
+   return <div>Loading!</div>
   }
 }
+export default App
 
 /* has code to determine location + month
 
@@ -46,5 +43,7 @@ when we make a classe we are making a class with one method, render attached to 
 class, so can use state now. To get a component to rerender itself we update its state, using setState.
 
 If in render(), the getCurrentPosition will cause repeated rendering, so move it. Supply it with a callback fn too.
+
+in render, we are taking a prop from the states on the App component and passing it a prop down into the SeasonDisplay.
 
 */
